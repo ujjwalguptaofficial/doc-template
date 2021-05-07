@@ -14,17 +14,17 @@ const srcDir = path.join(workingDir, 'src');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/example', 'code/pages/example', 'example');
 
 let dirCont = readdirSync(contentDir);
-let htmlFiles = dirCont.filter(function (elm) { return elm.match(/.html/i) });
+let htmlFiles = dirCont.filter(function (elm) { return elm.match(/.vue/i) });
 htmlFiles.forEach(file => {
     const fullPath = path.join(contentDir, file);
     const htmlData = readFileSync(fullPath, {
         encoding: 'utf-8'
     })
     // console.log("html", fullPath, htmlData)
-    const data = getVueComponent(htmlData);
-    const name = path.basename(file, '.html');
-    console.log("name", name);
-    writeFileSync(path.join(srcDir, 'pages', name + '.vue'), data, {
+    // const data = getVueComponent(htmlData);
+    // const name = path.basename(file, '.html');
+    // console.log("name", name);
+    writeFileSync(path.join(srcDir, 'pages', file), htmlData, {
         encoding: 'utf8'
     });
 })

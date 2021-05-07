@@ -144,7 +144,6 @@ module.exports = {
         // }
     ],
     build: {
-        vendor: ['vuetify']
     },
     modules: [
         // "@nuxtjs/axios",

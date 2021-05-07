@@ -1,13 +1,9 @@
 <template>
-  <div>
-    Hi
-    <nuxt />
-  </div>
+  <nuxt />
 </template>
 
 <script lang="ts">
+import "../styles/index.scss";
 export default {};
 </script>
-<style>
-@import "styles/index.scss";
-</style>
+ 
