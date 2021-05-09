@@ -9,11 +9,7 @@
         <i class="material-icons">menu</i>
       </button>
       <a class="b-menu__icon" href="/" title="JsStore Index Page">
-        <img
-          src="/img/JsStore_145_64.png"
-          alt="JsStore"
-          :class="{ 'height-50px': true }"
-        />
+        <img src="/img/JsStore_145_64.png" alt="JsStore" />
       </a>
     </template>
     <div v-else></div>
@@ -110,11 +106,12 @@ export default {
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .b-menu {
   justify-content: space-between;
   background: var(--primary-color);
-  padding: 14px;
+  padding: 0 10px;
+  height: 64px;
   color: var(--primary-contrast-color);
 }
 
@@ -122,9 +119,21 @@ a {
   color: var(--primary-contrast-color);
 }
 
+.b-menu__icon {
+  img {
+    height: 50px;
+  }
+}
+
 @media (min-width: 768px) {
   .b-menu__hamburger {
     display: none;
+  }
+
+  .b-menu__icon {
+    img {
+      height: unset;
+    }
   }
 }
 #selectVersions {

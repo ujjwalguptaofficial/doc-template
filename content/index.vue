@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div sm12>
+    <div class="col width-full">
       <div id="divLogoContainer">
         <div class="ml-20px">
           <img
