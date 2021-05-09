@@ -34,7 +34,7 @@ exports.convertMdToVueAndSaveInFolder = function (srcfolderPath, targetfolderToS
         //     encoding: 'utf8'
         // });
 
-        var vueComp = `<template><Layout>${html}</Layout></template>
+        var vueComp = `<template><Layout contentSrc='${srcfolderPath}'>${html}</Layout></template>
         <script>import Layout from '${layout}'
         export default {
             components:{Layout}
