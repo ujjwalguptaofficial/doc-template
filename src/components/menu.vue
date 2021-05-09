@@ -110,7 +110,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .b-menu {
   justify-content: space-between;
   background: var(--primary-color);
