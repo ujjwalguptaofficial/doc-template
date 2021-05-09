@@ -2,7 +2,7 @@
   <div class="row">
     <div sm12>
       <div id="divLogoContainer">
-        <div class="margin-left-20px">
+        <div class="ml-20px">
           <img
             class="responsive-img"
             src="/img/JsStore_350_155.png"
@@ -20,7 +20,7 @@
           its SQL divke apis.
         </div>
       </div>
-      <div class="row content-center margin-top-20px">
+      <div class="row content-center mt-20px">
         <a class="btn primary mr-10px x-big" href="tutorial/get-started">
           Get Started
         </a>
@@ -41,7 +41,7 @@
           <i class="margin-left-10px fab fa-gitter"></i>
         </a>
       </div>
-      <div class="col margin-top-20px content-center">
+      <div class="col mt-20px content-center">
         <h2>Supported with all frameworks</h2>
         <div class="row frameworks">
           <a
@@ -81,100 +81,7 @@
           </a>
         </div>
       </div>
-
-      <div class="col margin-top-20px top-border content-center">
-        <h3>A Big thanks to these open source tools</h3>
-        <div class="row margin-top-20px">
-          <a
-            target="_blank"
-            title="github"
-            href="https://github.com/ujjwalguptaofficial/JsStore"
-          >
-            <img
-              class="responsive-img"
-              src="/img/github.svg"
-              alt="github logo"
-            />
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="twitter handle"
-            href="https://twitter.com/ujjwal_kr_gupta"
-          >
-            <img
-              class="responsive-img"
-              src="/img/twitter.svg"
-              alt="twitter logo"
-            />
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="gitter"
-            href="https://gitter.im/JsStore"
-          >
-            <img
-              style="height: 50px; width: 50px; padding-top: 8px"
-              class="responsive-img"
-              src="/img/gitter.svg"
-              alt="github logo"
-            />
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="npm"
-            href="https://www.npmjs.com/package/jsstore"
-          >
-            <img
-              style="height: 50px; width: 50px; padding-top: 8px"
-              class="responsive-img"
-              src="/img/Npm-logo.svg"
-              alt="npm logo"
-            />
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="travis"
-            href="https://travis-ci.org/ujjwalguptaofficial/JsStore"
-          >
-            <img
-              style="height: 50px; width: 50px; padding-top: 8px"
-              class="responsive-img"
-              src="/img/travis.png"
-              alt="travis logo"
-            />
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="meidum"
-            href="https://medium.com/jsstore"
-          >
-            <svg class="svgIcon-use" width="45" height="45" viewBox="0 0 45 45">
-              <path
-                d="M5 40V5h35v35H5zm8.56-12.627c0 .555-.027.687-.318 1.03l-2.457 2.985v.396h6.974v-.396l-2.456-2.985c-.291-.343-.344-.502-.344-1.03V18.42l6.127 13.364h.714l5.256-13.364v10.644c0 .29 0 .342-.185.528l-1.848 1.796v.396h9.19v-.396l-1.822-1.796c-.184-.186-.21-.238-.21-.528V15.937c0-.291.026-.344.21-.528l1.823-1.797v-.396h-6.471l-4.622 11.542-5.203-11.542h-6.79v.396l2.14 2.64c.239.292.291.37.291.768v10.353z"
-              />
-            </svg>
-          </a>
-          <a
-            target="_blank"
-            class="margin-left-20px"
-            title="saucelab"
-            href="https://saucelabs.com/u/ujjwalgupta"
-          >
-            <img
-              style="height: 55px; width: 50px; padding-top: 8px"
-              class="responsive-img"
-              src="/img/saucelab.png"
-              alt="travis logo"
-            />
-          </a>
-        </div>
-      </div>
-      <div class="margin-top-20px top-border">
+      <div class="mt-20px top-border">
         <h4></h4>
         <div class="row wrap features content-center">
           <div
@@ -189,7 +96,100 @@
           </div>
         </div>
       </div>
-      <div class="text-center margin-top-20px">
+      <div class="col mt-20px top-border content-center">
+        <h3>A Big thanks to these open source tools</h3>
+        <div class="row mt-20px content-v-center">
+          <a
+            target="_blank"
+            title="github"
+            href="https://github.com/ujjwalguptaofficial/JsStore"
+          >
+            <img
+              class="responsive-img"
+              src="/img/github.svg"
+              alt="github logo"
+            />
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="twitter handle"
+            href="https://twitter.com/ujjwal_kr_gupta"
+          >
+            <img
+              class="responsive-img"
+              src="/img/twitter.svg"
+              alt="twitter logo"
+            />
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="gitter"
+            href="https://gitter.im/JsStore"
+          >
+            <img
+              style="height: 50px; width: 50px; padding-top: 8px"
+              class="responsive-img"
+              src="/img/gitter.svg"
+              alt="github logo"
+            />
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="npm"
+            href="https://www.npmjs.com/package/jsstore"
+          >
+            <img
+              style="height: 50px; width: 50px; padding-top: 8px"
+              class="responsive-img"
+              src="/img/Npm-logo.svg"
+              alt="npm logo"
+            />
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="travis"
+            href="https://travis-ci.org/ujjwalguptaofficial/JsStore"
+          >
+            <img
+              style="height: 50px; width: 50px; padding-top: 8px"
+              class="responsive-img"
+              src="/img/travis.png"
+              alt="travis logo"
+            />
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="meidum"
+            href="https://medium.com/jsstore"
+          >
+            <svg class="svgIcon-use" width="45" height="45" viewBox="0 0 45 45">
+              <path
+                d="M5 40V5h35v35H5zm8.56-12.627c0 .555-.027.687-.318 1.03l-2.457 2.985v.396h6.974v-.396l-2.456-2.985c-.291-.343-.344-.502-.344-1.03V18.42l6.127 13.364h.714l5.256-13.364v10.644c0 .29 0 .342-.185.528l-1.848 1.796v.396h9.19v-.396l-1.822-1.796c-.184-.186-.21-.238-.21-.528V15.937c0-.291.026-.344.21-.528l1.823-1.797v-.396h-6.471l-4.622 11.542-5.203-11.542h-6.79v.396l2.14 2.64c.239.292.291.37.291.768v10.353z"
+              />
+            </svg>
+          </a>
+          <a
+            target="_blank"
+            class="ml-20px"
+            title="saucelab"
+            href="https://saucelabs.com/u/ujjwalgupta"
+          >
+            <img
+              style="height: 55px; width: 50px; padding-top: 8px"
+              class="responsive-img"
+              src="/img/saucelab.png"
+              alt="travis logo"
+            />
+          </a>
+        </div>
+      </div>
+
+      <div class="text-center mt-20px">
         Created with
         <i class="fas fa-heart" style="color: red"></i> by
         <a href="https://ujjwalguptaofficial.github.io/">Ujjwal Gupta</a>
@@ -294,8 +294,16 @@ export default {
 
 .frameworks {
   margin-top: 20px;
-  img {
-    height: 80px;
+  //   img {
+  //     height: 80px;
+  //   }
+
+  .vue {
+    img {
+      width: 40px;
+      height: auto;
+    }
+    margin-right: 20px;
   }
 }
 
