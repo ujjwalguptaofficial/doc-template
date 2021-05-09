@@ -1,14 +1,14 @@
-@import "flexboot/src/basic.scss";
-@import "flexboot/src/flex.scss";
-@import "flexboot/src/button.scss";
-@import "flexboot/src/grid.scss";
-@import "flexboot/src/grid-xxl.scss";
-@import "flexboot/src/effect.scss";
-@import "flexboot/src/margin.scss";
-@import "flexboot/src/padding.scss";
-@import "flexboot/src/list.scss";
-@import "flexboot/src/border.scss";
-@import "flexboot/src/header.scss";
+@import "flexboot/src/index.scss";
+// @import "flexboot/src/flex.scss";
+// @import "flexboot/src/button.scss";
+// @import "flexboot/src/grid.scss";
+// @import "flexboot/src/grid-xxl.scss";
+// @import "flexboot/src/effect.scss";
+// @import "flexboot/src/margin.scss";
+// @import "flexboot/src/padding.scss";
+// @import "flexboot/src/list.scss";
+// @import "flexboot/src/border.scss";
+// @import "flexboot/src/header.scss";
 
 :root {
     --primary-color: #42A5F5;
@@ -29,6 +29,10 @@ h4,
 
 body {
     font-family: "Jost", -apple-system, blinkmacsystemfont, "Segoe UI", roboto, "Helvetica Neue", arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+a {
+    text-decoration: none;
 }
 
 .mr-10px {

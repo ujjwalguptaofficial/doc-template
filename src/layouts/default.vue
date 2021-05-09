@@ -6,12 +6,16 @@
       integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
       crossorigin="anonymous"
     />
+    <Menu />
     <nuxt />
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import "../styles/index.scss";
-export default {};
+import Menu from "../components/menu.vue";
+export default {
+  components: { Menu },
+};
 </script>
  
