@@ -3,38 +3,43 @@ var showdown = require('showdown'),
     converter = new showdown.Converter(),
     fm = require('front-matter');
 
-var folderName;
 
 function getAllFilesFromFolder(folderName) {
     return fse.readdirSync(folderName);
 };
-exports.convertMdToVueAndSaveInFolder = function (folderPath, folderToSave, layout) {
-    folderName = folderPath;
+exports.convertMdToVueAndSaveInFolder = function (srcfolderPath, targetfolderToSave, layout) {
     // console.log("src exist",fs.existsSync("src"));
     // console.log("src layout exist",fs.existsSync("src/layouts"));
     // open tutorial layout
-    var layoutContent = fse.readFileSync('code/layouts/' + layout + '.vueLayout', {
-        encoding: 'utf8'
-    });
+    // var layoutContent = fse.readFileSync('code/layouts/' + layout + '.vueLayout', {
+    //     encoding: 'utf8'
+    // });
 
-    getAllFilesFromFolder(folderName).forEach(fileName => {
-        var fMData = fm(getContentOfFile(fileName));
-        var html = converter.makeHtml(fMData.body);
-        var layout = addMetaTags(layoutContent, fMData.attributes);
+    getAllFilesFromFolder(srcfolderPath).every(fileName => {
+        var fmData = fm(getContentOfFile(srcfolderPath, fileName));
+        var html = converter.makeHtml(fmData.body);
+        // var layout = addMetaTags(layoutContent, fmData.attributes);
         // console.log(layoutContent);
         fileName = fileName.split(".")[0].trim();
-        var filePath = `${folderToSave}/${fileName}.vue`;
-        fse.ensureDirSync(folderToSave);
+        var filePath = `${targetfolderToSave}/${fileName}.vue`;
+        fse.ensureDirSync(targetfolderToSave);
         //recreate file if exist otherwise create
         fse.closeSync(fse.openSync(filePath, 'w'))
-        var index = layout.indexOf('`');
-        var firstString = layout.substring(0, index + 1);
-        var lastString = layout.substring(index + 1);
-        html = encodeURI(html);
-        fse.writeFileSync(filePath, firstString + html + lastString, {
+
+        // var index = layout.indexOf('`');
+        // var firstString = layout.substring(0, index + 1);
+        // var lastString = layout.substring(index + 1);
+        // html = encodeURI(html);
+        // fse.writeFileSync(filePath, firstString + html + lastString, {
+        //     encoding: 'utf8'
+        // });
+
+        var vueComp = `<template><div>${html}</div></template>`;
+        console.log(vueComp);
+        fse.writeFileSync(filePath, vueComp, {
             encoding: 'utf8'
         });
-        // console.log(html);
+        return false;
     });
 }
 
@@ -59,7 +64,7 @@ function addMetaTags(layout, metaTags) {
     return layout;
 }
 
-function getContentOfFile(fileName) {
+function getContentOfFile(folderName, fileName) {
     return fse.readFileSync(`${folderName}/${fileName}`, {
         encoding: 'utf8'
     });

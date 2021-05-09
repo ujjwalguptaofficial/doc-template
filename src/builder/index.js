@@ -6,11 +6,13 @@ const path = require('path')
 const workingDir = process.cwd();
 const contentDir = path.join(workingDir, 'content');
 const srcDir = path.join(workingDir, 'src');
+const pagesDir = path.join(srcDir, 'pages');
+const layoutDir = path.join(srcDir, 'layouts');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v1/tutorial', 'code/pages/v1/tutorial', 'tutorial.v1');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v1/example', 'code/pages/v1/example', 'example.v1');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v2/tutorial', 'code/pages/v2/tutorial', 'tutorial.v2');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v2/example', 'code/pages/v2/example', 'example.v2');
-// mdHelper.convertMdToVueAndSaveInFolder('../docs/tutorial', 'code/pages/tutorial', 'tutorial');
+mdHelper.convertMdToVueAndSaveInFolder(path.join(contentDir, 'tutorial'), path.join(pagesDir, 'tutorial'), path.join(layoutDir, 'tutorial.vue'));
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/example', 'code/pages/example', 'example');
 
 let dirCont = readdirSync(contentDir);
@@ -24,7 +26,7 @@ htmlFiles.forEach(file => {
     // const data = getVueComponent(htmlData);
     // const name = path.basename(file, '.html');
     // console.log("name", name);
-    writeFileSync(path.join(srcDir, 'pages', file), htmlData, {
+    writeFileSync(path.join(pagesDir, file), htmlData, {
         encoding: 'utf8'
     });
 })
