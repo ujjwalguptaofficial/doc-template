@@ -39,3 +39,36 @@ a {
 .mr-10px {
     margin-right: 10px;
 }
+
+pre {
+    margin: 2rem 0;
+}
+
+pre,
+code {
+    font-family: sfmono-regular, menlo, monaco, consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: .875rem;
+    border-radius: .25rem;
+    // direction: ltr
+    //     /* rtl:ignore;; */
+    // ;
+    // unicode-bidi: bidi-override;
+}
+
+code {
+    padding: 1.25rem 1.5rem !important;
+    background: #fbf7f0;
+    // color: #1d2d35;
+}
+
+// pre code {
+//     display: block;
+//     overflow-x: auto;
+//     line-height: 1.5;
+//     padding: 1.25rem 1.5rem;
+//     -moz-tab-size: 4;
+//     -o-tab-size: 4;
+//     tab-size: 4;
+//     scrollbar-width: thin;
+//     scrollbar-color: transparent transparent
+// }

@@ -7,7 +7,7 @@ const workingDir = process.cwd();
 const contentDir = path.join(workingDir, 'content');
 const srcDir = path.join(workingDir, 'src');
 const pagesDir = path.join(srcDir, 'pages');
-const layoutDir = path.join(srcDir, 'layouts');
+const layoutDir = path.join(workingDir, 'layouts');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v1/tutorial', 'code/pages/v1/tutorial', 'tutorial.v1');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v1/example', 'code/pages/v1/example', 'example.v1');
 // mdHelper.convertMdToVueAndSaveInFolder('../docs/v2/tutorial', 'code/pages/v2/tutorial', 'tutorial.v2');

@@ -4,10 +4,10 @@
   </div>
 </template>
 <script  >
-export default class extends Vue {
-  tutorialContent = ``;
-  title = "";
-  keywords = "";
-  description = "";
-}
+export default {
+  // tutorialContent = ``;
+  // title = "";
+  // keywords = "";
+  // description = "";
+};
 </script>

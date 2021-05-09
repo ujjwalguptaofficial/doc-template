@@ -34,12 +34,18 @@ exports.convertMdToVueAndSaveInFolder = function (srcfolderPath, targetfolderToS
         //     encoding: 'utf8'
         // });
 
-        var vueComp = `<template><div>${html}</div></template>`;
-        console.log(vueComp);
+        var vueComp = `<template><Layout>${html}</Layout></template>
+        <script>import Layout from '${layout}'
+        export default {
+            components:{Layout}
+        };
+        </script>
+        `;
+        // console.log(vueComp);
         fse.writeFileSync(filePath, vueComp, {
             encoding: 'utf8'
         });
-        return false;
+        return true;
     });
 }
 

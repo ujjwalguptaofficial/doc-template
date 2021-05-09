@@ -140,7 +140,10 @@ module.exports = {
             }, {
                 href: "https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons",
                 rel: "stylesheet"
-            }]
+            }],
+        script: [{
+            src: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js'
+        }]
     },
     /*
      ** Customize the progress-bar color
