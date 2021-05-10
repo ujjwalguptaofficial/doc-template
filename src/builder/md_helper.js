@@ -19,8 +19,8 @@ exports.convertMdToVueAndSaveInFolder = function (srcFilePath, targetfolderToSav
     fse.ensureDirSync(targetfolderToSave);
     //recreate file if exist otherwise create
     fse.closeSync(fse.openSync(targetfilePath, 'w'))
-
-    var vueComp = `<template><Layout contentSrc='${srcFilePath}'>${html}</Layout></template>
+    const meta = fmData.attributes;
+    var vueComp = `<template><Layout title='${meta.Title}' description='${meta.Description}' keywords='${meta.Keywords}' contentSrc='${srcFilePath}'>${html}</Layout></template>
         <script>import Layout from '${layout}'
         export default {
             components:{Layout}

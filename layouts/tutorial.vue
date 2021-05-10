@@ -18,18 +18,57 @@
         <i @click="goto(1)" class="fas fa-chevron-right"></i>
       </div>
     </div>
+    <div class="b-tutorial__sticky-btn">
+      <a
+        class="btn rounded secondary margin-bottom-70px"
+        alt="edit this doc"
+        target="_blank"
+        href="https://gitter.im/JsStore/Lobby"
+      >
+        <i class="fab fa-gitter"></i>
+      </a>
+      <a
+        alt="edit this doc"
+        target="_blank"
+        :href="`https://github.com/ujjwalguptaofficial/jsstore.docs/edit/master/content${currentUrl}.md`"
+        class="btn secondary"
+        fixed
+        bottom
+        right
+        fab
+      >
+        <i class="far fa-edit"></i>
+      </a>
+    </div>
   </div>
 </template>
 <script  >
 import { copyToClipboard } from "@/utils";
 
 export default {
-  // tutorialContent = ``;
-  // title = "";
-  // keywords = "";
-  // description = "";
+  head() {
+    return {
+      title: `JsStore - ${this.title}`,
+      meta: [
+        // hid is used as unique identifier. Do not use `vmid` for it as it will not work
+        {
+          hid: "keywords",
+          name: "keywords",
+          content: this.keywords,
+        },
+        {
+          hid: "description",
+          name: "description",
+          content: this.description,
+        },
+      ],
+    };
+  },
   props: {
     contentSrc: String,
+    title: String,
+    description: String,
+    keywords: String,
   },
   computed: {
     currentUrl() {
@@ -54,6 +93,7 @@ export default {
     this.links = links;
   },
   mounted() {
+    console.log("meta", this.title);
     hljs.highlightAll();
     const copyHtml = `Copy <i class="margin-left-10px far fa-copy"></i>`;
     document.querySelectorAll("pre code").forEach((el) => {
@@ -90,7 +130,8 @@ export default {
   padding: 10px 10px 0 10px;
 }
 .b-tutorial__links {
-  padding-right: 50px;
+  padding-right: 30px;
+  border-right: 1px solid #e9ecef;
 }
 .b-tutorial__links__item {
   cursor: pointer;
@@ -108,6 +149,9 @@ export default {
   text-align: center;
   color: var(--secondary-color);
 }
+.b-tutorial__content {
+  padding-left: 40px;
+}
 .b-tutorial__content__btns {
   display: flex;
   justify-content: space-between;
@@ -116,6 +160,21 @@ export default {
   margin-bottom: 20px;
   i {
     cursor: pointer;
+  }
+}
+.b-tutorial__sticky-btn {
+  position: fixed;
+  right: 0;
+  bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1000;
+  a {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    padding: 0;
   }
 }
 </style>
