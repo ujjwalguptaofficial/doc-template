@@ -25,38 +25,30 @@
         </a>
       </div>
       <div class="ml-10px mr-10px">|</div>
-      <div>
-        <a
-          title="fork on github"
-          href="https://github.com/ujjwalguptaofficial/JsStore/fork"
+      <a
+        title="fork on github"
+        href="https://github.com/ujjwalguptaofficial/JsStore/fork"
+      >
+        <svg
+          version="1.1"
+          width="10"
+          height="18"
+          style="fill: white; vertical-align: sub"
+          viewBox="0 0 10 16"
+          class="octicon octicon-repo-forked"
+          aria-hidden="true"
         >
-          <svg
-            version="1.1"
-            width="10"
-            height="18"
-            style="fill: white; vertical-align: sub"
-            viewBox="0 0 10 16"
-            class="octicon octicon-repo-forked"
-            aria-hidden="true"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"
-            />
-          </svg>
-          Fork
-        </a>
-      </div>
-      <div>
-        <select
-          class="dropdown"
-          id="selectVersions"
-          v-model="activeVersion"
-          @change="onVersionChange"
-        >
-          <option :value="i" v-for="i in 3" :key="i">V {{ i }}</option>
-        </select>
-      </div>
+          <path
+            fill-rule="evenodd"
+            d="M8 1a1.993 1.993 0 0 0-1 3.72V6L5 8 3 6V4.72A1.993 1.993 0 0 0 2 1a1.993 1.993 0 0 0-1 3.72V6.5l3 3v1.78A1.993 1.993 0 0 0 5 15a1.993 1.993 0 0 0 1-3.72V9.5l3-3V4.72A1.993 1.993 0 0 0 8 1zM2 4.2C1.34 4.2.8 3.65.8 3c0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3 10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2zm3-10c-.66 0-1.2-.55-1.2-1.2 0-.65.55-1.2 1.2-1.2.65 0 1.2.55 1.2 1.2 0 .65-.55 1.2-1.2 1.2z"
+          />
+        </svg>
+        Fork
+      </a>
+      <template v-if="release">
+        <div class="ml-10px mr-10px">|</div>
+        <a target="_blank" :href="release.url">v - {{ release.tag }}</a>
+      </template>
     </div>
   </div>
 </template>
@@ -69,17 +61,25 @@ export default {
   },
   data() {
     return {
-      activeVersion: 3,
+      release: null,
       starCount: null,
     };
   },
   async mounted() {
     this.activeVersion = this.getVersion();
     try {
-      const response = await fetch(
-        "//api.github.com/repos/ujjwalguptaofficial/jsstore"
-      );
-      this.starCount = (await response.json()).stargazers_count;
+      const responses = await Promise.all([
+        fetch("//api.github.com/repos/ujjwalguptaofficial/jsstore"),
+        fetch(
+          "https://api.github.com/repos/ujjwalguptaofficial/JsStore/releases"
+        ),
+      ]);
+      this.starCount = (await responses[0].json()).stargazers_count;
+      const releaseResponse = await responses[1].json();
+      this.release = {
+        tag: releaseResponse[0].tag_name,
+        url: releaseResponse[0].html_url,
+      };
     } catch (ex) {}
   },
   methods: {
