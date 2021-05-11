@@ -12,14 +12,16 @@
     />
     <Menu />
     <nuxt />
+    <AppFooter />
   </div>
 </template>
 
 <script>
 import "../styles/index.scss";
 import Menu from "@/components/menu.vue";
+import AppFooter from "@/components/footer.vue";
 export default {
-  components: { Menu },
+  components: { Menu, AppFooter },
   mounted() {},
 };
 </script>
