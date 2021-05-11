@@ -113,7 +113,7 @@ export default {
           }
         }
       });
-      console.log("result", result, this.childActiveUrlIndex);
+      // console.log("result", result, this.childActiveUrlIndex);
       return result;
     },
   },
@@ -128,7 +128,6 @@ export default {
     this.links = links;
   },
   mounted() {
-    console.log("meta", this.title);
     hljs.highlightAll();
     const copyHtml = `Copy <i class="margin-left-10px far fa-copy"></i>`;
     document.querySelectorAll("pre code").forEach((el) => {
@@ -151,13 +150,20 @@ export default {
       return "/tutorial/" + value;
     },
     goto(delta) {
-      const splittedPath = this.currentUrl.split("/");
-      splittedPath[splittedPath.length - 1] = this.links[
-        this.activeUrlIndex + delta
-      ].url;
-      const path = splittedPath.join("/");
-      this.$router.push({
-        path,
+      const childActiveUrlIndex = this.childActiveUrlIndex;
+      let path;
+      let activeLink = this.links[this.activeUrlIndex];
+      if (childActiveUrlIndex >= 0) {
+        const nextChildren = activeLink.children[childActiveUrlIndex + delta];
+        if (nextChildren) {
+          path = nextChildren.url;
+        }
+      }
+      if (!path) {
+        path = this.links[this.activeUrlIndex + delta].url;
+      }
+      return this.$router.push({
+        path: this.url(path),
       });
     },
   },
