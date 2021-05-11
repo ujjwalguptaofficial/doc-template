@@ -27,11 +27,19 @@ function processFolderContent(dirLocation, parentFolder = "") {
         }
         else if (location.match(/.md/i)) {
             const fileName = path.basename(location, '.md');
-            const layoutFullPath = path.join(layoutDir, parentFolder + '.vue');
-            console.log("layoutFullPath", layoutFullPath);
-            if (existsSync(layoutFullPath)) {
-                mdHelper.convertMdToVueAndSaveInFolder(fullPath, path.join(pagesDir, parentFolder), layoutFullPath);
+            let splittedParentPath = parentFolder.split("/");
+            while (splittedParentPath.length > 0) {
+                const layoutFullPath = path.join(layoutDir, splittedParentPath.join("/") + '.vue');
+                console.log("layoutFullPath", layoutFullPath);
+                if (existsSync(layoutFullPath)) {
+                    mdHelper.convertMdToVueAndSaveInFolder(fullPath, path.join(pagesDir, parentFolder), layoutFullPath);
+                    splittedParentPath = [];
+                }
+                else {
+                    splittedParentPath.pop();
+                }
             }
+
         }
         else if (location.match(/.vue/i)) {
 

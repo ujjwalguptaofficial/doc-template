@@ -41,7 +41,30 @@ module.exports = [
     },
     {
         text: "Select",
-        url: "select"
+        url: "select",
+        children: [{
+            text: "Limit",
+            url: "limit",
+        }, {
+            text: "Skip",
+            url: "skip"
+        },
+        {
+            text: "Order By",
+            url: "order-by"
+        },
+        {
+            text: "Aggregate",
+            url: "aggregate"
+        },
+        {
+            text: "Group By",
+            url: "group-by"
+        },
+        {
+            text: "Distinct",
+            url: "distinct"
+        },]
     },
     {
         text: "Where",
@@ -55,30 +78,7 @@ module.exports = [
         text: "Or",
         url: "or"
     },
-    {
-        text: "Limit",
-        url: "limit"
-    },
-    {
-        text: "Skip",
-        url: "skip"
-    },
-    {
-        text: "Order By",
-        url: "order-by"
-    },
-    {
-        text: "Aggregate",
-        url: "aggregate"
-    },
-    {
-        text: "Group By",
-        url: "group-by"
-    },
-    {
-        text: "Distinct",
-        url: "distinct"
-    },
+
     {
         text: "Update",
         url: "update"

@@ -1,15 +1,36 @@
 <template>
   <div class="row b-tutorial">
     <div class="col-sm-4 col-md-4 col-lg-2 b-tutorial__links">
-      <a
-        class="col b-tutorial__links__item ripple"
-        :class="{ 'b-tutorial__links__item--active': index === activeUrlIndex }"
-        v-for="(link, index) in links"
-        :key="link.text"
-        :href="link.url"
-      >
-        {{ link.text }}
-      </a>
+      <div v-for="(link, index) in links" :key="link.text">
+        <a
+          class="row content-v-center b-tutorial__links__item ripple"
+          :class="{
+            'b-tutorial__links__item--active':
+              index === (!link.children && activeUrlIndex),
+          }"
+          :href="url(link.url)"
+        >
+          <template v-if="link.children">
+            <i v-if="index === activeUrlIndex" class="fas fa-chevron-down"></i>
+            <i v-else class="fas fa-chevron-right"></i>
+          </template>
+          {{ link.text }}
+        </a>
+        <template v-if="index === activeUrlIndex">
+          <a
+            v-for="(item, childIndex) in link.children"
+            :key="item.url"
+            class="row content-v-center b-tutorial__links__item-children ripple"
+            :class="{
+              'b-tutorial__links__item--active':
+                childIndex === childActiveUrlIndex,
+            }"
+            :href="url(link.url + '/' + item.url)"
+          >
+            {{ item.text }}
+          </a>
+        </template>
+      </div>
     </div>
     <div class="b-tutorial__content col-sm-8 col-md-8 col-lg-10">
       <slot></slot>
@@ -78,14 +99,28 @@ export default {
       const splittedPath = this.$route.path.split("/");
       const lastPath = splittedPath[splittedPath.length - 1];
       const result = this.links.findIndex((val) => {
-        return val.url === lastPath;
+        if (val.url === lastPath) {
+          this.childActiveUrlIndex = -1;
+          return true;
+        }
+        const children = val.children;
+        if (children) {
+          for (let i = 0, length = children.length; i < length; i++) {
+            if (children[i].url === lastPath) {
+              this.childActiveUrlIndex = i;
+              return true;
+            }
+          }
+        }
       });
+      console.log("result", result, this.childActiveUrlIndex);
       return result;
     },
   },
   data() {
     return {
       links: [],
+      childActiveUrlIndex: -1,
     };
   },
   fetch() {
@@ -112,6 +147,9 @@ export default {
     });
   },
   methods: {
+    url(value) {
+      return "/tutorial/" + value;
+    },
     goto(delta) {
       const splittedPath = this.currentUrl.split("/");
       splittedPath[splittedPath.length - 1] = this.links[
@@ -137,9 +175,19 @@ export default {
   cursor: pointer;
   padding: 10px;
   color: var(--link-color);
+  font-size: 1.1rem;
   &:hover {
     background-color: rgba(0, 0, 0, 0.05);
   }
+  .fas {
+    margin-right: 5px;
+  }
+}
+
+.b-tutorial__links__item-children {
+  @extend .b-tutorial__links__item;
+  margin-left: 20px;
+  font-size: 1rem;
 }
 
 .b-tutorial__links__item--active {
@@ -148,6 +196,7 @@ export default {
   border-radius: 3px;
   text-align: center;
   color: var(--secondary-color);
+  justify-content: center;
 }
 .b-tutorial__content {
   padding-left: 40px;
