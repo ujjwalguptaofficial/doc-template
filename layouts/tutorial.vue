@@ -1,6 +1,6 @@
 <template>
   <div class="row b-tutorial">
-    <div class="col-sm-4 col-md-4 col-lg-2 b-tutorial__links">
+    <div class="col-sm-4 col-md-3 col-lg-2 b-tutorial__links">
       <div v-for="(link, index) in links" :key="link.text">
         <a
           class="row content-v-center b-tutorial__links__item ripple"
@@ -32,13 +32,14 @@
         </template>
       </div>
     </div>
-    <div class="b-tutorial__content col-sm-8 col-md-8 col-lg-10">
+    <div class="b-tutorial__content col-sm-8 col-md-9 col-lg-8">
       <slot></slot>
       <div class="b-tutorial__content__btns">
         <i @click="goto(-1)" class="fas fa-chevron-left"></i>
         <i @click="goto(1)" class="fas fa-chevron-right"></i>
       </div>
     </div>
+    <div class="col-lg-2 width-full">Side bar</div>
     <div class="b-tutorial__sticky-btn">
       <a
         class="btn rounded secondary margin-bottom-70px"

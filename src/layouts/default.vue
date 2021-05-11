@@ -20,17 +20,15 @@ import "../styles/index.scss";
 import Menu from "@/components/menu.vue";
 export default {
   components: { Menu },
-  mounted() {
-    
-  },
+  mounted() {},
 };
 </script>
  <style>
 .code-copy {
-  position: absolute;
   z-index: 1000;
-  right: 10px;
   cursor: pointer;
   padding: 5px;
+  margin-bottom: -30px;
+  text-align: right;
 }
 </style>
