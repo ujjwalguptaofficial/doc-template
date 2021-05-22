@@ -26,6 +26,7 @@ h4,
 .h4 {
     margin: 2rem 0 1rem;
     font-weight: 700;
+    scroll-margin-top: 64px;
 }
 
 body {
@@ -86,4 +87,74 @@ p {
 ul {
     @extend .list;
     list-style-type: disc;
+}
+
+ol {
+    @extend .list;
+    list-style-type: decimal;
+}
+
+.top-border {
+    border-top: 2px solid #e9ecef;
+}
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+    :hover {
+        .anchor {
+            visibility: visible;
+            text-decoration: none;
+        }
+    }
+}
+
+.anchor {
+    visibility: hidden;
+    padding-left: 0.5rem;
+}
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid;
+    // background: var(--secondary-color);
+    width: max-content;
+
+    .tabs__names {
+        display: flex;
+
+        .tabs__names__item {
+            padding: 5px 20px;
+            border: 1px solid;
+            cursor: pointer;
+            border: 1px solid var(--secondary-color);
+            margin-right: 5px;
+
+            &.active {
+                color: var(--primary-contrast-color);
+                border: none;
+                background: var(--primary-color);
+            }
+        }
+    }
+
+    .tabs__content {
+        margin-top: 5px;
+        // background-color: #e4dddd;
+        border-left: 1px solid;
+        border-bottom: 1px solid;
+        // border-right: 1px solid;
+        padding: 5px;
+    }
 }

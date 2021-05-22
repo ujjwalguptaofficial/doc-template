@@ -1,12 +1,33 @@
 <template>
   <div class="row b-tutorial">
     <div class="col-sm-4 col-md-3 col-lg-2 b-tutorial__links">
-      <div v-for="(link, index) in links" :key="link.text">
+      <input
+        class="textbox b-tutorial__links__search"
+        type="text"
+        placeholder="Search in docs"
+        v-model="searchText"
+        @input="onSearch"
+      />
+      <div
+        class="b-tutorial__links__search-result"
+        v-if="searchResults.length > 0"
+      >
+        <a
+          class="row content-v-center ripple"
+          v-for="link in searchResults"
+          :key="link.text"
+          :href="link.url"
+          >{{ link.text }}</a
+        >
+      </div>
+      <div v-else v-for="(link, index) in links" :key="link.text">
         <a
           class="row content-v-center b-tutorial__links__item ripple"
           :class="{
             'b-tutorial__links__item--active':
-              index === (!link.children && activeUrlIndex),
+              childActiveUrlIndex < 0 && index === activeUrlIndex,
+            'b-tutorial__links__item--active-with-children':
+              link.children && childActiveUrlIndex < 0,
           }"
           :href="url(link.url)"
         >
@@ -35,11 +56,21 @@
     <div class="b-tutorial__content col-sm-8 col-md-9 col-lg-8">
       <slot></slot>
       <div class="b-tutorial__content__btns">
-        <i @click="goto(-1)" class="fas fa-chevron-left"></i>
-        <i @click="goto(1)" class="fas fa-chevron-right"></i>
+        <a :href="prevUrl">
+          <i class="fas fa-chevron-left"></i>
+        </a>
+        <a :href="nextUrl">
+          <i class="fas fa-chevron-right"></i>
+        </a>
       </div>
     </div>
-    <div class="col-lg-2 width-full">Side bar</div>
+    <div class="col-lg-2 width-full pl-10px pr-5px">
+      <a class="ad-container" target="_blank" href="http://fortjs.info/">
+        <h6>FortJs</h6>
+        <img class="mt-5px" src="//fortjs.info/img/fort_js_logo_200_137.png" />
+        <div>{{ ads[0] }}</div>
+      </a>
+    </div>
     <div class="b-tutorial__sticky-btn">
       <a
         class="btn rounded secondary margin-bottom-70px"
@@ -66,8 +97,19 @@
 </template>
 <script  >
 import { copyToClipboard } from "@/utils";
-
+import FlexSearch from "flexsearch";
 export default {
+  created() {
+    this.ads = ["Component based framework for nodejs"];
+    this.finder = new FlexSearch({
+      encode: "balance",
+      tokenize: "forward",
+      threshold: 0,
+      async: true,
+      worker: false,
+      cache: false,
+    });
+  },
   head() {
     return {
       title: `JsStore - ${this.title}`,
@@ -94,10 +136,15 @@ export default {
   },
   computed: {
     currentUrl() {
-      return this.$route.path;
+      let path = this.$route.path;
+      const length = path.length;
+      if (path[length - 1] === "/") {
+        path = path.substr(0, length - 1);
+      }
+      return path;
     },
     activeUrlIndex() {
-      const splittedPath = this.$route.path.split("/");
+      const splittedPath = this.currentUrl.split("/");
       const lastPath = splittedPath[splittedPath.length - 1];
       const result = this.links.findIndex((val) => {
         if (val.url === lastPath) {
@@ -117,11 +164,19 @@ export default {
       // console.log("result", result, this.childActiveUrlIndex);
       return result;
     },
+    prevUrl() {
+      return this.getLink(-1);
+    },
+    nextUrl() {
+      return this.getLink(1);
+    },
   },
   data() {
     return {
       links: [],
       childActiveUrlIndex: -1,
+      searchResults: [],
+      searchText: "",
     };
   },
   fetch() {
@@ -129,6 +184,7 @@ export default {
     this.links = links;
   },
   mounted() {
+    window.comp = this;
     hljs.highlightAll();
     const copyHtml = `Copy <i class="margin-left-10px far fa-copy"></i>`;
     document.querySelectorAll("pre code").forEach((el) => {
@@ -145,26 +201,66 @@ export default {
         }, 1000);
       };
     });
+    this.addLinksToFinder();
   },
   methods: {
+    onSearch() {
+      if (this.searchTimer) {
+        clearTimeout(this.searchTimer);
+      }
+      this.searchTimer = setTimeout(() => {
+        this.finder.search(this.searchText).then((results) => {
+          this.searchResults = results.map((item) => {
+            return { url: item, text: this.flatLinks[item] };
+          });
+          this.searchTimer = null;
+        });
+      }, 200);
+    },
+    addLinksToFinder() {
+      const flatLinks = {};
+      this.links.forEach((link) => {
+        let url = this.url(link.url);
+        flatLinks[url] = link.text;
+        this.finder.add(url, link.text);
+        if (link.children) {
+          link.children.forEach((item) => {
+            url = this.url(link.url + "/" + item.url);
+            flatLinks[url] = item.text;
+            this.finder.add(url, item.text);
+          });
+        }
+      });
+      this.flatLinks = flatLinks;
+    },
     url(value) {
       return "/tutorial/" + value;
     },
-    goto(delta) {
+    getLink(delta) {
       const childActiveUrlIndex = this.childActiveUrlIndex;
       let path;
       let activeLink = this.links[this.activeUrlIndex];
-      if (childActiveUrlIndex >= 0) {
-        const nextChildren = activeLink.children[childActiveUrlIndex + delta];
+      const activeLinkChildren = activeLink.children;
+      if (childActiveUrlIndex >= 0 || (activeLinkChildren && delta > 0)) {
+        const nextChildren = activeLinkChildren[childActiveUrlIndex + delta];
         if (nextChildren) {
-          path = nextChildren.url;
+          path = activeLink.url + "/" + nextChildren.url;
+        } else if (delta < 0) {
+          path = activeLink.url;
         }
       }
       if (!path) {
-        path = this.links[this.activeUrlIndex + delta].url;
+        const deltaLink = this.links[this.activeUrlIndex + delta];
+        if (deltaLink) {
+          path = deltaLink.url;
+        }
       }
+
+      return path ? this.url(path) : "/";
+    },
+    goto(delta) {
       return this.$router.push({
-        path: this.url(path),
+        path: this.getLink(delta),
       });
     },
   },
@@ -177,6 +273,17 @@ export default {
 .b-tutorial__links {
   padding-right: 30px;
   border-right: 1px solid #e9ecef;
+  position: sticky;
+  top: 4rem;
+  z-index: 100;
+  height: calc(100vh - 4rem);
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 3px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #e4dddd;
+  }
 }
 .b-tutorial__links__item {
   cursor: pointer;
@@ -205,6 +312,9 @@ export default {
   color: var(--secondary-color);
   justify-content: center;
 }
+.b-tutorial__links__item--active-with-children {
+  justify-content: unset;
+}
 .b-tutorial__content {
   padding-left: 40px;
 }
@@ -231,6 +341,24 @@ export default {
     border-radius: 50%;
     margin-bottom: 10px;
     padding: 0;
+  }
+}
+.ad-container {
+  text-align: center;
+  border: 1px solid;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  cursor: pointer;
+}
+.b-tutorial__links__search {
+  padding: 5px 5px;
+  max-width: 100%;
+  margin-bottom: 20px;
+}
+.b-tutorial__links__search-result {
+  a {
+    @extend .b-tutorial__links__item;
   }
 }
 </style>
