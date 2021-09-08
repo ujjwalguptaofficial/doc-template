@@ -18,7 +18,7 @@ const layoutDir = path.join(workingDir, 'layouts');
 
 function processFolderContent(dirLocation, parentFolder = "") {
     let dirCont = readdirSync(dirLocation);
-    console.log("dirContent", dirCont);
+    // console.log("dirContent", dirCont);
     dirCont.forEach(location => {
         const fullPath = path.join(dirLocation, location);
         const stat = statSync(fullPath);
@@ -30,7 +30,7 @@ function processFolderContent(dirLocation, parentFolder = "") {
             let splittedParentPath = parentFolder.split("/");
             while (splittedParentPath.length > 0) {
                 const layoutFullPath = path.join(layoutDir, splittedParentPath.join("/") + '.vue');
-                console.log("layoutFullPath", layoutFullPath);
+                // console.log("layoutFullPath", layoutFullPath);
                 if (existsSync(layoutFullPath)) {
                     mdHelper.convertMdToVueAndSaveInFolder(fullPath, path.join(pagesDir, parentFolder), layoutFullPath);
                     splittedParentPath = [];

@@ -8,7 +8,7 @@ function getAllFilesFromFolder(folderName) {
     return fse.readdirSync(folderName);
 };
 exports.convertMdToVueAndSaveInFolder = function (srcFilePath, targetfolderToSave, layout) {
-    console.log(...arguments);
+    // console.log(...arguments);
     var content = fse.readFileSync(srcFilePath, {
         encoding: 'utf8'
     });
