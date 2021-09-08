@@ -9,8 +9,8 @@
 <script>
 import Vue from "vue";
 import "@/styles/index.scss";
-import Menu from "@/components/menu.vue";
-import AppFooter from "@/components/footer.vue";
+import Menu from "~/content/menu.vue";
+import AppFooter from "~/content/footer.vue";
 Vue.filter("imgPath", (val) => {
   return "img/" + val;
 });

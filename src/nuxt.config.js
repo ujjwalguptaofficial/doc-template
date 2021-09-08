@@ -187,6 +187,7 @@ module.exports = {
             //     config.mode = 'development'
             // }
             config.resolve.alias["@"] = path.resolve(__dirname);
+            config.resolve.alias["~"] = path.resolve(__dirname, '..');
         }
     },
     modules: [

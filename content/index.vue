@@ -5,7 +5,7 @@
         <div class="ml-20px">
           <img
             class="responsive-img"
-            src="/img/JsStore_350_155.png"
+            :src="'JsStore_350_155.png' | imgPath"
             alt="JsStore logo"
           />
         </div>
@@ -49,35 +49,35 @@
             target="_blank"
             href="https://github.com/ujjwalguptaofficial/jsstore-examples/tree/master/vue"
           >
-            <img src="/img/vue-logo.png" />
+            <img :src="'vue-logo.png' | imgPath" />
           </a>
           <a
             class="vue"
             target="_blank"
             href="https://github.com/ujjwalguptaofficial/jsstore-examples/tree/master/react"
           >
-            <img src="/img/React.js_logo-512.png" />
+            <img :src="'React.js_logo-512.png' | imgPath" />
           </a>
           <a
             class="vue"
             target="_blank"
             href="https://github.com/ujjwalguptaofficial/jsstore-examples/tree/master/svelte"
           >
-            <img src="/img/svelte.png" />
+            <img :src="'svelte.png' | imgPath" />
           </a>
           <a
             class="vue"
             target="_blank"
             href="https://github.com/ujjwalguptaofficial/jsstore-examples/tree/master/angular"
           >
-            <img src="/img/angular.png" />
+            <img :src="'angular.png' | imgPath" />
           </a>
           <a
             class="vue"
             target="_blank"
             href="https://github.com/ujjwalguptaofficial/jsstore-examples/tree/master/electron"
           >
-            <img src="/img/electronjs.png" />
+            <img :src="'electronjs.png' | imgPath" />
           </a>
         </div>
       </div>
@@ -106,7 +106,7 @@
           >
             <img
               class="responsive-img"
-              src="/img/github.svg"
+              :src="'github.svg' | imgPath"
               alt="github logo"
             />
           </a>
@@ -119,7 +119,7 @@
             <img
               style="height: 50px; width: 50px; padding-top: 8px"
               class="responsive-img"
-              src="/img/gitter.svg"
+              :src="'gitter.svg' | imgPath"
               alt="github logo"
             />
           </a>
@@ -132,7 +132,7 @@
             <img
               style="height: 50px; width: 50px; padding-top: 8px"
               class="responsive-img"
-              src="/img/Npm-logo.svg"
+              :src="'Npm-logo.svg' | imgPath"
               alt="npm logo"
             />
           </a>
@@ -145,7 +145,7 @@
             <img
               style="height: 50px; width: 50px; padding-top: 8px"
               class="responsive-img"
-              src="/img/travis.png"
+              :src="'travis.png' | imgPath"
               alt="travis logo"
             />
           </a>
@@ -170,7 +170,7 @@
             <img
               style="height: 55px; width: 50px; padding-top: 8px"
               class="responsive-img"
-              src="/img/saucelab.png"
+              :src="'saucelab.png' | imgPath"
               alt="travis logo"
             />
           </a>
