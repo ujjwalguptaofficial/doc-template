@@ -15,20 +15,14 @@
     <div v-else></div>
     <div id="b-menu__github-info" class="row content-v-center">
       <div>
-        <a
-          title="star jsstore"
-          href="https://github.com/ujjwalguptaofficial/JsStore"
-        >
+        <a title="star jsstore" :href="githubUrl">
           <i class="fab fa-github"></i>
           Star
           <span class="star-count" v-if="starCount">{{ starCount }}</span>
         </a>
       </div>
       <div class="ml-10px mr-10px">|</div>
-      <a
-        title="fork on github"
-        href="https://github.com/ujjwalguptaofficial/JsStore/fork"
-      >
+      <a title="fork on github" :href="forkUrl">
         <svg
           version="1.1"
           width="10"
@@ -54,9 +48,21 @@
 </template>
 <script>
 export default {
+  created() {
+    this.repoUrl = "ujjwalguptaofficial/jsstore";
+  },
   computed: {
     shouldShowMenuIcon() {
       return this.$route.path != "/";
+    },
+    githubUrl() {
+      return "https://github.com/" + this.repoUrl;
+    },
+    forkUrl() {
+      return this.githubUrl + "/fork";
+    },
+    apiUrl() {
+      return "https://api.github.com/repos/" + this.repoUrl;
     },
   },
   data() {
@@ -69,10 +75,8 @@ export default {
     this.activeVersion = this.getVersion();
     try {
       const responses = await Promise.all([
-        fetch("//api.github.com/repos/ujjwalguptaofficial/jsstore"),
-        fetch(
-          "https://api.github.com/repos/ujjwalguptaofficial/JsStore/releases"
-        ),
+        fetch(this.apiUrl),
+        fetch(`${this.apiUrl}/releases`),
       ]);
       this.starCount = (await responses[0].json()).stargazers_count;
       const releaseResponse = await responses[1].json();

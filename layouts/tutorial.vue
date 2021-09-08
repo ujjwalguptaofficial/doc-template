@@ -29,7 +29,7 @@
             'b-tutorial__links__item--active-with-children':
               link.children && childActiveUrlIndex < 0,
           }"
-          :href="url(link.url)"
+          :href="url(link)"
         >
           <template v-if="link.children">
             <i v-if="index === activeUrlIndex" class="fas fa-chevron-down"></i>
@@ -65,10 +65,10 @@
       </div>
     </div>
     <div class="col-lg-2 width-full pl-10px pr-5px">
-      <a class="ad-container" target="_blank" href="http://fortjs.info/">
-        <h6>FortJs</h6>
-        <img class="mt-5px" src="//fortjs.info/img/fort_js_logo_200_137.png" />
-        <div>{{ ads[0] }}</div>
+      <a class="ad-container" target="_blank" href="https://jsstore.net/">
+        <h6>JsStore</h6>
+        <img class="mt-5px" src="//jsstore.net/img/JsStore_350_155.png" />
+        <div>Complete IndexeDB wrapper with SQL like api.</div>
       </a>
     </div>
     <div class="b-tutorial__sticky-btn">
@@ -76,14 +76,14 @@
         class="btn rounded secondary margin-bottom-70px"
         alt="edit this doc"
         target="_blank"
-        href="https://gitter.im/JsStore/Lobby"
+        href="https://gitter.im/fortjs/Lobby"
       >
         <i class="fab fa-gitter"></i>
       </a>
       <a
         alt="edit this doc"
         target="_blank"
-        :href="`https://github.com/ujjwalguptaofficial/jsstore.docs/edit/master/content${currentUrl}.md`"
+        :href="`https://github.com/ujjwalguptaofficial/fortjs.docs/edit/master/content${currentUrl}.md`"
         class="btn secondary"
         fixed
         bottom
@@ -234,7 +234,15 @@ export default {
       this.flatLinks = flatLinks;
     },
     url(value) {
-      return "/tutorial/" + value;
+      let url = value;
+      if (typeof value === "object") {
+        url = value.url;
+        const children = value.children;
+        if (value.expand && children) {
+          url = url + "/" + children[0].url;
+        }
+      }
+      return "/tutorial/" + url;
     },
     getLink(delta) {
       const childActiveUrlIndex = this.childActiveUrlIndex;
