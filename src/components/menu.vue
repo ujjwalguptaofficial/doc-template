@@ -9,7 +9,7 @@
         <i class="material-icons">menu</i>
       </button>
       <a class="b-menu__icon" href="/" title="JsStore Index Page">
-        <img src="/img/JsStore_145_64.png" alt="JsStore" />
+        <img :src="'JsStore_145_64.png' | imgPath" alt="JsStore" />
       </a>
     </template>
     <div v-else></div>
